@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+Jeu de dés
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Caractéristiques :
+1. Affichage des dés : L'application affiche les dés et leur valeur actuelle.
+2. Lancer les dés : Les utilisateurs peuvent lancer les dés pour obtenir une nouvelle
+valeur.
+3. Calcul du score : Le jeu calcule automatiquement le score du joueur en fonction des
+valeurs des dés.
+4. Gestion des tours : Le jeu permet de gérer les tours des joueurs, en alternant entre
+les joueurs après chaque lancer.
+5. Affichage du gagnant : Le jeu affiche le joueur gagnant avec le score le plus élevé.
+6. Réinitialisation du jeu : Les utilisateurs peuvent réinitialiser le jeu pour commencer
+une nouvelle partie.
 
-## Available Scripts
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Tâches pour construire le projet :
+1. Mettre en place un nouveau projet React en utilisant Create React App - done
+2. Créer un composant principal (dice) qui sera responsable de l'affichage global du jeu.
+3. Créer un composant (Dice) pour afficher un dé et sa valeur.
+4. Gérer l'état des dés dans le composant Dice en utilisant les hooks useState.
+5. Implémenter la fonctionnalité de lancer les dés en générant de nouvelles valeurs
+aléatoires pour les dés dans le composant Dice.
+6. Calculer le score du joueur en utilisant les valeurs des dés et mettre à jour le score
+dans le composant Dice.
+7. Mettre en place la gestion des tours des joueurs en utilisant une variable d'état pour
+suivre le joueur actuel (joueur 1 ou joueur 2) dans le composant Dice.
+8. Alterner entre les joueurs après chaque lancer de dés en mettant à jour la variable
+d'état du joueur actuel dans le composant Dice.
+9. Déterminer le joueur gagnant en comparant les scores des deux joueurs et en
+affichant le résultat dans le composant Dice.
+10. Ajouter un bouton de réinitialisation pour réinitialiser le jeu en remettant à zéro les
+valeurs des dés, les scores et en choisissant un joueur de départ aléatoire.
+Utiliser les images des dés pour générer l’affichage des scores et pour animer le jeu.
+Utilisez les concepts avancés de React tels que les hooks (useState, useEffect) et les
+composants fonctionnels pour développer le projet. Vous pouvez également ajouter des
+styles CSS pour rendre le jeu plus attrayant visuellement. Bonne chance dans votre création
+du jeu de dés !
