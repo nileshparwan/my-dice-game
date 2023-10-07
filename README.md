@@ -15,12 +15,12 @@ une nouvelle partie.
 
 Tâches pour construire le projet :
 1. Mettre en place un nouveau projet React en utilisant Create React App - done
-2. Créer un composant principal (dice) qui sera responsable de l'affichage global du jeu.
-3. Créer un composant (Dice) pour afficher un dé et sa valeur.
-4. Gérer l'état des dés dans le composant Dice en utilisant les hooks useState.
-5. Implémenter la fonctionnalité de lancer les dés en générant de nouvelles valeurs
+2. Créer un composant principal (dice) qui sera responsable de l'affichage global du jeu. - done
+3. Créer un composant (Dice) pour afficher un dé et sa valeur. - done
+4. Gérer l'état des dés dans le composant Dice en utilisant les hooks useState - done
+5. Implémenter la fonctionnalité de lancer les dés en générant de nouvelles valeurs - done
 aléatoires pour les dés dans le composant Dice.
-6. Calculer le score du joueur en utilisant les valeurs des dés et mettre à jour le score
+6. Calculer le score du joueur en utilisant les valeurs des dés et mettre à jour le score - done
 dans le composant Dice.
 7. Mettre en place la gestion des tours des joueurs en utilisant une variable d'état pour
 suivre le joueur actuel (joueur 1 ou joueur 2) dans le composant Dice.

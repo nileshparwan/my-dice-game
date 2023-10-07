@@ -8,16 +8,19 @@ const Dice: React.FunctionComponent = () => {
 
     const [state, setState] = useState({
         firstDiceDigit: randomNumber(),
-        secondDiceDigit: randomNumber()
+        secondDiceDigit: randomNumber(),
+        startGame: false
     });
 
-    const { firstDiceDigit, secondDiceDigit } = state;
+    const { firstDiceDigit, secondDiceDigit, startGame } = state;
+    const scores = startGame ? firstDiceDigit + secondDiceDigit : 0;
 
     const rollDice = () => {
         setState((prev) => ({
             ...prev,
             firstDiceDigit: randomNumber(),
-            secondDiceDigit: randomNumber()
+            secondDiceDigit: randomNumber(),
+            startGame: true
         }))
     }
 
@@ -42,7 +45,7 @@ const Dice: React.FunctionComponent = () => {
                 <DiceImages digit={secondDiceDigit} />
             </div>
 
-            <p aria-live="polite">1</p>
+            <p aria-live="polite">{scores}</p>
 
             <button
                 className="btn"
