@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 
 interface IDiceImage {
-    digit: number
+    digit: number;
+    className: string;
 }
 
 const dice1 = (
@@ -48,17 +49,19 @@ const dice2 = (
 
 )
 
-const DiceImages: React.FunctionComponent<IDiceImage> = ({ digit }) => {
-    let component: ReactNode = <></>
+const RenderComponent: React.FunctionComponent<{ children: ReactNode, className: string }> = ({ children, className }) => <div className={className}>{children}</div>
+
+const DiceImages: React.FunctionComponent<IDiceImage> = ({ digit, className }) => {
+    let component: ReactNode = <div></div>
     switch (digit) {
         case 1:
-            component = dice1;
+            component = <RenderComponent className={className}>{dice1}</RenderComponent>;
             break;
         case 2:
-            component = dice2;
+            component = <RenderComponent className={className}>{dice2}</RenderComponent>;
             break
         default:
-            component = <></>
+            component = <RenderComponent className={className}><></></RenderComponent>
     }
     return component
 }
