@@ -63,11 +63,11 @@ const Dice: React.FunctionComponent = () => {
 
             <button
                 className="btn"
-                aria-label="Lancer le dés"
+                aria-label="lancer les dés"
                 onClick={buttonHandler}
                 onKeyDown={keyPressHandler}
             >
-                Lancer le dés
+                lancer les dés
             </button>
         </div>
     );
