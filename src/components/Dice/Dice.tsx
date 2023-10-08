@@ -119,7 +119,7 @@ const Dice: React.FunctionComponent = () => {
 
                 {
                     hasWinner ? (
-                        <button onClick={resetGame}>Reset</button>
+                        <button className='btn btn-reset' onClick={resetGame}>Reset</button>
                     ) : (
                         <button
                             className="btn"

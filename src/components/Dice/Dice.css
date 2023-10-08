@@ -106,8 +106,23 @@ p {
     font-size: 18;
 }
 
+.btn-reset{
+    background-color:#ff2c6c;
+}
+
+@keyframes move {
+    75%,
+    100% {
+        translate: 0 88px;
+    }
+}
+
 @keyframes beat {
     0% {
+        scale: 0.8
+    }
+
+    50% {
         scale: 0.9
     }
 
