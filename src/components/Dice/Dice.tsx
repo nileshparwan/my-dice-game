@@ -40,7 +40,7 @@ const Dice: React.FunctionComponent = () => {
 
     return (
         <div className="dice-container">
-            <div className="dice-image-wrapper" aria-hidden="true">
+
             <div className='players-container'>
                 {
                     players.map((player: number, index: number) => {
@@ -53,6 +53,8 @@ const Dice: React.FunctionComponent = () => {
                     })
                 }
             </div>
+
+            <div className="image-container" aria-hidden="true">
                 <DiceImages digit={firstDiceDigit} />
                 <DiceImages digit={secondDiceDigit} />
             </div>
