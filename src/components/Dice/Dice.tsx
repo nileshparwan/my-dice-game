@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler, MouseEventHandler } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, useRef } from 'react';
 import DiceImages from '../DiceImages/DiceImages';
 import useDice from '../../hooks/useDice';
 import { randomNumber, randomPlayer } from '../../utils/helpers';
@@ -12,11 +12,18 @@ const Dice: React.FunctionComponent = () => {
         currentPlayer,
         hasWinner,
         scores,
+        loader,
         setScores,
         setState,
-    } = useDice(diceSides, players.length);
+        setLoader
+    } = useDice(diceSides, players.length, 3000);
+
+    const totalScore = diceResults[0] + diceResults[1];
 
     const rollDice = () => {
+        // set loader and animation 
+        setLoader(true);
+
         // set new dice value
         const dice1 = randomNumber(2);
         const dice2 = randomNumber(2);
@@ -68,7 +75,7 @@ const Dice: React.FunctionComponent = () => {
         return winner;
     }
 
-    const resetGame = ():void => {
+    const resetGame = (): void => {
         setScores([0, 0]);
         setState({
             diceResults: [randomNumber(diceSides), randomNumber(diceSides)],
@@ -89,11 +96,11 @@ const Dice: React.FunctionComponent = () => {
                                     key={player}
                                     className={[
                                         "player",
-                                        currentPlayer === player ? 'active' : ''
+                                        currentPlayer === player ? 'active active--animation' : ''
                                     ].join(' ')}
                                 >
                                     <h2>Player {player}</h2>
-                                    <p aria-live='polite'>{scores[index]}</p>
+                                    <p aria-live='polite'>{loader ? "..." : scores[index]}</p>
                                 </section>
                             )
                         })
@@ -101,31 +108,40 @@ const Dice: React.FunctionComponent = () => {
                 </div>
 
                 <div className="imageContainer" aria-hidden="true">
-                    <DiceImages digit={diceResults[0]} />
-                    <DiceImages digit={diceResults[1]} />
+                    {
+                        Array.from({ length: 2 }, (_, index) => (
+                            <DiceImages className={[ "diceImage", loader ? index === 0 ? "rotateClockwise--annimation" : "rotateAntiClockwise--animation" : ""].join(" ")} digit={diceResults[index]} />
+                        ))
+                    }
                 </div>
 
-                <p aria-live="polite">Scores: {diceResults[0] + diceResults[1]}</p>
+                <p aria-live="polite">{loader ? "Calculating..." : `Scores: ${totalScore}`}</p>
 
                 {
                     hasWinner ? (
                         <button className='btn btn-reset' onClick={resetGame}>Reset</button>
                     ) : (
                         <button
+                            disabled={loader}
                             className="btn"
                             aria-label="lancer les dés"
+                            aria-live="polite"
                             onClick={buttonHandler}
                             onKeyDown={keyPressHandler}
                         >
-                            lancer les dés
+                            {loader ? "loading..." : "lancer les dés"}
                         </button>
                     )
                 }
             </div>
 
-            <div className={['diceGame--result', hasWinner && 'active'].join(' ')}>
-                <p aria-live='polite'>Winner {playerWon()}</p>
-            </div>
+            {
+                !loader && (
+                    <div className={['diceGame--result', hasWinner ? 'active appear--animation' : "disappear--animation"].join(' ')}>
+                        <p aria-live='polite'>Winner <strong>player {playerWon()}</strong></p>
+                    </div>
+                )
+            }
         </div>
     );
 };

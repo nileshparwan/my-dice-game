@@ -77,7 +77,6 @@
 
 .player.active {
     font-weight: 400;
-    animation: beat 2s linear infinite;
 }
 
 .player p {
@@ -110,23 +109,61 @@ p {
     background-color:#ff2c6c;
 }
 
-@keyframes move {
-    75%,
-    100% {
-        translate: 0 88px;
-    }
+.player.active--animation {
+    animation: beat 3s linear infinite alternate;
+}
+
+.rotateClockwise--annimation {
+    animation: rotateClockwise 3s linear infinite;
+}
+
+.rotateAntiClockwise--animation {
+    animation: rotateAntiClockwise 3s linear infinite;
+}
+
+.appear--animation {
+    animation: appear 3s linear;
 }
 
 @keyframes beat {
     0% {
-        scale: 0.8
-    }
-
-    50% {
         scale: 0.9
     }
 
     100% {
         scale: 1;
+    }
+}
+
+@keyframes rotateClockwise {
+    0% {
+        scale: 0.8;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        scale: 1;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateAntiClockwise {
+    0% {
+        scale: 0.8;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        scale: 1;
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
