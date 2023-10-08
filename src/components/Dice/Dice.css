@@ -109,22 +109,6 @@ p {
     background-color:#ff2c6c;
 }
 
-.player.active--animation {
-    animation: beat 3s linear infinite alternate;
-}
-
-.rotateClockwise--annimation {
-    animation: rotateClockwise 3s linear infinite;
-}
-
-.rotateAntiClockwise--animation {
-    animation: rotateAntiClockwise 3s linear infinite;
-}
-
-.appear--animation {
-    animation: appear 3s linear;
-}
-
 @keyframes beat {
     0% {
         scale: 0.9
@@ -167,3 +151,20 @@ p {
         opacity: 1;
     }
 }
+
+.player.active--animation {
+    animation: beat 3s linear infinite alternate;
+}
+
+.rotateClockwise--annimation {
+    animation: rotateClockwise 3s linear infinite;
+}
+
+.rotateAntiClockwise--animation {
+    animation: rotateAntiClockwise 3s linear infinite;
+}
+
+.appear--animation {
+    animation: appear 3s linear;
+}
+
