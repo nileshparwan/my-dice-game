@@ -69,7 +69,7 @@ const Dice: React.FunctionComponent = () => {
         return winner;
     }
 
-    const resetGame = () => {
+    const resetGame = ():void => {
         setScores([0, 0]);
         setState({
             diceResults: [randomNumber(), randomNumber()],
