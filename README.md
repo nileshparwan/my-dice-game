@@ -1,37 +1,54 @@
-Jeu de dés
+## Variables Documentation
 
-Caractéristiques :
-1. Affichage des dés : L'application affiche les dés et leur valeur actuelle.
-2. Lancer les dés : Les utilisateurs peuvent lancer les dés pour obtenir une nouvelle
-valeur.
-3. Calcul du score : Le jeu calcule automatiquement le score du joueur en fonction des
-valeurs des dés.
-4. Gestion des tours : Le jeu permet de gérer les tours des joueurs, en alternant entre
-les joueurs après chaque lancer.
-5. Affichage du gagnant : Le jeu affiche le joueur gagnant avec le score le plus élevé.
-6. Réinitialisation du jeu : Les utilisateurs peuvent réinitialiser le jeu pour commencer
-une nouvelle partie.
+### totalDice
 
+- **Type:** `number`
+- **Description:** Represents the total number of dice available in the game.
+- **Example Usage:** `const totalDice: number = 6;`
 
-Tâches pour construire le projet :
-1. Mettre en place un nouveau projet React en utilisant Create React App - done
-2. Créer un composant principal (dice) qui sera responsable de l'affichage global du jeu. - done
-3. Créer un composant (Dice) pour afficher un dé et sa valeur. - done
-4. Gérer l'état des dés dans le composant Dice en utilisant les hooks useState - done
-5. Implémenter la fonctionnalité de lancer les dés en générant de nouvelles valeurs - done
-aléatoires pour les dés dans le composant Dice.
-6. Calculer le score du joueur en utilisant les valeurs des dés et mettre à jour le score - done
-dans le composant Dice.
-7. Mettre en place la gestion des tours des joueurs en utilisant une variable d'état pour
-suivre le joueur actuel (joueur 1 ou joueur 2) dans le composant Dice.
-8. Alterner entre les joueurs après chaque lancer de dés en mettant à jour la variable
-d'état du joueur actuel dans le composant Dice.
-9. Déterminer le joueur gagnant en comparant les scores des deux joueurs et en
-affichant le résultat dans le composant Dice.
-10. Ajouter un bouton de réinitialisation pour réinitialiser le jeu en remettant à zéro les
-valeurs des dés, les scores et en choisissant un joueur de départ aléatoire.
-Utiliser les images des dés pour générer l’affichage des scores et pour animer le jeu.
-Utilisez les concepts avancés de React tels que les hooks (useState, useEffect) et les
-composants fonctionnels pour développer le projet. Vous pouvez également ajouter des
-styles CSS pour rendre le jeu plus attrayant visuellement. Bonne chance dans votre création
-du jeu de dés !
+### listOfPlayers
+
+- **Type:** `Array<number>`
+- **Description:** An array containing the player IDs participating in the game.
+- **Example Usage:** `const listOfPlayers: Array<number> = [1, 2];`
+
+### totalNuberOfPlayers
+
+- **Type:** `number`
+- **Description:** Represents the total number of players in the game, derived from the length of `listOfPlayers`.
+- **Example Usage:** `const totalNuberOfPlayers = listOfPlayers.length;`
+
+### loaderDelay
+
+- **Type:** `number`
+- **Description:** Specifies the delay (in milliseconds) for a loader or any asynchronous operation.
+- **Example Usage:** `const loaderDelay = 3000;`
+
+### maxDiceRolls
+
+- **Type:** `number`
+- **Description:** Represents the maximum number of times a player can roll the dice during the game.
+- **Example Usage:** `const maxDiceRolls = 2;`
+- **note** `2` means 2*2 = `4`
+
+## Functions Documentation
+
+### `rollDice`
+
+- **Description:** Initiates the dice rolling process, updating game state variables such as dice results, player scores, and current player.
+
+### `buttonHandler`
+**Type:** MouseEventHandler<HTMLButtonElement>
+**Description:** Handles the click event on a button, triggering the rollDice function.
+
+### `keyPressHandler`
+**Type:** KeyboardEventHandler<HTMLButtonElement>
+**Description:** Handles keyboard events, specifically the "Enter" key, to trigger the rollDice function.
+
+### `playerWon`
+**Type:** () => number
+**Description:** Determines the player with the highest score and returns their ID as the winner.
+
+### `resetGame`
+**Type:** () => void
+**Description:** Resets the game state, including scores, dice results, current player, and game-related flags.
