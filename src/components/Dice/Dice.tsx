@@ -3,8 +3,9 @@ import './Dice.css';
 import DiceImages from '../DiceImages/DiceImages';
 
 const Dice: React.FunctionComponent = () => {
-    const diceSides = 2;
-    const randomNumber = () => Math.ceil(Math.random() * diceSides);
+    const diceSides: number = 2;
+    const players: Array<number> = [1, 2];
+    const randomNumber = (): number => Math.ceil(Math.random() * diceSides);
 
     const [state, setState] = useState({
         firstDiceDigit: randomNumber(),
@@ -45,7 +46,13 @@ const Dice: React.FunctionComponent = () => {
                 {
                     players.map((player: number, index: number) => {
                         return (
-                            <section key={player} className={["player", currentPlayer === player ? 'active' : ''].join(' ')}>
+                            <section
+                                key={player}
+                                className={[
+                                    "player",
+                                    currentPlayer === player ? 'active' : ''
+                                ].join(' ')}
+                            >
                                 <h2>Player {player}</h2>
                                 <p aria-live='polite'>{scores[index]}</p>
                             </section>
