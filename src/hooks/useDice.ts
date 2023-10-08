@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import { randomNumber, randomPlayer } from '../utils/helpers';
 
-const useDice = (maxNumber: number, totalPlayer: number, loaderDelay: number = 3000) => {
+const useDice = (totalDice:number, totalNuberOfPlayers:number, loaderDelay:number, maxDiceRolls:number) => {
+    const newMaxRolls = maxDiceRolls * 2;
     const [loader, setLoader] = useState(true);
     const [scores, setScores] = useState<Array<number>>([0, 0]);
     const [state, setState] = useState({
-        diceResults: [randomNumber(maxNumber), randomNumber(maxNumber)],
-        currentPlayer: randomPlayer(totalPlayer),
+        diceResults: [randomNumber(totalDice), randomNumber(totalDice)],
+        currentPlayer: randomPlayer(totalNuberOfPlayers),
         hasWinner: false,
-        count: 0
+        count: 0,
+        gameStarted: false
     });
 
-    const { diceResults, currentPlayer, hasWinner, count } = state;
+    const { diceResults, currentPlayer, hasWinner, count, gameStarted } = state;
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,13 +22,17 @@ const useDice = (maxNumber: number, totalPlayer: number, loaderDelay: number = 3
     }, [loader, loaderDelay])
 
     useEffect(() => {
-        const allPlayerPlayed = scores.every(score => score !== 0);
-        const allPlayerScoreNotSame = allPlayerPlayed && scores[0] !== scores[1];
-        const isCountEven = count % 2 === 0
-        if (allPlayerPlayed && allPlayerScoreNotSame && isCountEven) {
-            setState(prev => ({ ...prev, hasWinner: allPlayerPlayed && allPlayerScoreNotSame }))
+        const areAllPlayersActive = scores.every(score => score !== 0);
+        const doPlayersHaveDifferentScores = areAllPlayersActive && scores[0] !== scores[1];
+        const isCurrentGameCountEven = newMaxRolls === count && count % 2 === 0;
+        const isNextGameCountEven = count > newMaxRolls && count % 2 === 0
+
+        if (areAllPlayersActive && doPlayersHaveDifferentScores && (isCurrentGameCountEven || isNextGameCountEven)) {
+            setState(prev => ({ ...prev, hasWinner: true }));
+        } else if (count === newMaxRolls && areAllPlayersActive && scores[0] === scores[1]) {
+            setState(prev => ({ ...prev, count: count + 1 }));
         }
-    }, [diceResults, scores, currentPlayer, count]);
+    }, [diceResults, scores, currentPlayer, count, newMaxRolls]);
 
     return {
         diceResults,
@@ -35,6 +41,7 @@ const useDice = (maxNumber: number, totalPlayer: number, loaderDelay: number = 3
         scores,
         count,
         loader,
+        gameStarted,
         setScores,
         setState,
         setLoader

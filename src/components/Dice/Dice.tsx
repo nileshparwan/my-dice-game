@@ -1,22 +1,26 @@
-import React, { KeyboardEventHandler, MouseEventHandler, useRef } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler } from 'react';
 import DiceImages from '../DiceImages/DiceImages';
 import useDice from '../../hooks/useDice';
 import { randomNumber, randomPlayer } from '../../utils/helpers';
 import './Dice.css';
 
 const Dice: React.FunctionComponent = () => {
-    const diceSides: number = 2;
-    const players: Array<number> = [1, 2];
+    const totalDice: number = 6;
+    const listOfPlayers: Array<number> = [1, 2];
+    const totalNuberOfPlayers = listOfPlayers.length;
+    const loaderDelay = 3000;
+    const maxDiceRolls = 2;
     const {
         diceResults,
         currentPlayer,
         hasWinner,
         scores,
         loader,
+        gameStarted,
         setScores,
         setState,
         setLoader
-    } = useDice(diceSides, players.length, 3000);
+    } = useDice(totalDice, totalNuberOfPlayers, loaderDelay, maxDiceRolls);
 
     const totalScore = diceResults[0] + diceResults[1];
 
@@ -40,6 +44,7 @@ const Dice: React.FunctionComponent = () => {
 
         setState(prev => ({
             ...prev,
+            gameStarted: true,
             diceResults: [dice1, dice2],
             currentPlayer: nextPlayer,
             count: prev.count + 1
@@ -71,17 +76,18 @@ const Dice: React.FunctionComponent = () => {
                 playerIndex = index;
             }
         })
-        const winner = players[playerIndex]
+        const winner = listOfPlayers[playerIndex]
         return winner;
     }
 
     const resetGame = (): void => {
         setScores([0, 0]);
         setState({
-            diceResults: [randomNumber(diceSides), randomNumber(diceSides)],
-            currentPlayer: randomPlayer(players.length),
+            diceResults: [randomNumber(totalDice), randomNumber(totalDice)],
+            currentPlayer: randomPlayer(listOfPlayers.length),
             hasWinner: false,
-            count: 0
+            count: 0,
+            gameStarted: false
         })
     }
 
@@ -90,13 +96,16 @@ const Dice: React.FunctionComponent = () => {
             <div className="diceGame--container">
                 <div className='playersContainer'>
                     {
-                        players.map((player: number, index: number) => {
+                        listOfPlayers.map((player: number, index: number) => {
                             return (
                                 <section
                                     key={player}
                                     className={[
                                         "player",
-                                        currentPlayer === player ? 'active active--animation' : ''
+                                        currentPlayer === player ?
+                                            !loader ? `active ${!hasWinner ? 'active--animation' : ''}` :
+                                                "" :
+                                            ''
                                     ].join(' ')}
                                 >
                                     <h2>Player {player}</h2>
@@ -110,15 +119,19 @@ const Dice: React.FunctionComponent = () => {
                 <div className="imageContainer" aria-hidden="true">
                     {
                         Array.from({ length: 2 }, (_, index) => (
-                            <DiceImages className={[ "diceImage", loader ? index === 0 ? "rotateClockwise--annimation" : "rotateAntiClockwise--animation" : ""].join(" ")} digit={diceResults[index]} />
+                            <DiceImages 
+                            className={[ "diceImage", loader ? index === 0 ? "rotateClockwise--annimation" : "rotateAntiClockwise--animation" : ""].join(" ")} 
+                            digit={diceResults[index]}
+                            loader={loader}
+                            />
                         ))
                     }
                 </div>
 
-                <p aria-live="polite">{loader ? "Calculating..." : `Scores: ${totalScore}`}</p>
+                <p aria-live="polite">{gameStarted ? loader ? "Calculating..." : `Scores: ${totalScore}` : "Score 0"}</p>
 
                 {
-                    hasWinner ? (
+                    hasWinner && !loader ? (
                         <button className='btn btn-reset' onClick={resetGame}>Reset</button>
                     ) : (
                         <button
