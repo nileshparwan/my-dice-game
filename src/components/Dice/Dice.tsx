@@ -1,26 +1,25 @@
-import React, { KeyboardEventHandler, MouseEventHandler, useEffect, useState } from 'react';
-import './Dice.css';
+import React, { KeyboardEventHandler, MouseEventHandler } from 'react';
 import DiceImages from '../DiceImages/DiceImages';
+import useDice from '../../hooks/useDice';
+import { randomNumber, randomPlayer } from '../../utils/helpers';
+import './Dice.css';
 
 const Dice: React.FunctionComponent = () => {
     const diceSides: number = 2;
     const players: Array<number> = [1, 2];
-    const randomNumber = (): number => Math.ceil(Math.random() * diceSides);
-    const randomPlayer = (): number => Math.ceil(Math.random() * players.length);
-    const [scores, setScores] = useState<Array<number>>([0, 0]);
-    const [state, setState] = useState({
-        diceResults: [randomNumber(), randomNumber()],
-        currentPlayer: randomPlayer(),
-        hasWinner: false,
-        count: 0
-    });
-
-    const { diceResults, currentPlayer, hasWinner, count } = state;
+    const {
+        diceResults,
+        currentPlayer,
+        hasWinner,
+        scores,
+        setScores,
+        setState,
+    } = useDice(diceSides, players.length);
 
     const rollDice = () => {
         // set new dice value
-        const dice1 = randomNumber();
-        const dice2 = randomNumber();
+        const dice1 = randomNumber(2);
+        const dice2 = randomNumber(2);
         const total = dice1 + dice2;
         const playerScore = () => {
             const newScore = scores;
@@ -72,21 +71,12 @@ const Dice: React.FunctionComponent = () => {
     const resetGame = ():void => {
         setScores([0, 0]);
         setState({
-            diceResults: [randomNumber(), randomNumber()],
-            currentPlayer: randomPlayer(),
+            diceResults: [randomNumber(diceSides), randomNumber(diceSides)],
+            currentPlayer: randomPlayer(players.length),
             hasWinner: false,
             count: 0
         })
     }
-
-    useEffect(() => {
-        const allPlayerPlayed = scores.every(score => score !== 0);
-        const allPlayerScoreNotSame = allPlayerPlayed && scores[0] !== scores[1];
-        const isCountEven = count % 2 === 0
-        if (allPlayerPlayed && allPlayerScoreNotSame && isCountEven) {
-            setState(prev => ({ ...prev, hasWinner: allPlayerPlayed && allPlayerScoreNotSame }))
-        }
-    }, [diceResults, scores, currentPlayer, count]);
 
     return (
         <div className="diceGame">
