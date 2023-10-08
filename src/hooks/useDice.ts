@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { randomNumber, randomPlayer } from '../utils/helpers';
 
-const useDice = (maxNumber: number, totalPlayer: number) => {
+const useDice = (maxNumber: number, totalPlayer: number, loaderDelay: number = 3000) => {
+    const [loader, setLoader] = useState(true);
     const [scores, setScores] = useState<Array<number>>([0, 0]);
     const [state, setState] = useState({
         diceResults: [randomNumber(maxNumber), randomNumber(maxNumber)],
@@ -11,6 +12,12 @@ const useDice = (maxNumber: number, totalPlayer: number) => {
     });
 
     const { diceResults, currentPlayer, hasWinner, count } = state;
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoader(false)
+        }, loaderDelay);
+    }, [loader, loaderDelay])
 
     useEffect(() => {
         const allPlayerPlayed = scores.every(score => score !== 0);
@@ -27,8 +34,10 @@ const useDice = (maxNumber: number, totalPlayer: number) => {
         hasWinner,
         scores,
         count,
+        loader,
         setScores,
         setState,
+        setLoader
     }
 }
 
