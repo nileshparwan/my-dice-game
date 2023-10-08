@@ -1,4 +1,4 @@
-.dice-container {
+.diceGame--container {
     height: auto;
     width: 75vw;
     max-width: 650px;
@@ -8,10 +8,11 @@
     border-radius: 24px;
     background-color: #fff;
     padding: 50px 20px;
+    margin-bottom: 20px;
 }
 
 @media (min-width: 768px) {
-    .dice-container {
+    .diceGame--container {
         padding-right: 30px;
         padding-left: 30px;
     }
@@ -28,7 +29,7 @@
 }
 
 @media (min-width: 768px) {
-    .players-container {
+    .playersContainer {
         gap: 50px;
     }
 }
@@ -40,7 +41,7 @@
     flex-direction: column;
     background-color: transparent;
     font-weight: 200;
-    scale:0.9;
+    scale: 0.9;
     border: 3px solid rgb(193, 190, 190);
     border-radius: 10px;
 }
@@ -62,8 +63,8 @@
     margin: 0;
 }
 
-.image-container {
-    padding:0 20px;
+.imageContainer {
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
@@ -85,8 +86,11 @@ p {
 }
 
 @keyframes beat {
-    0% { scale:0.9 }
-    100% { 
-        scale: 1; 
+    0% {
+        scale: 0.9
+    }
+
+    100% {
+        scale: 1;
     }
 }
