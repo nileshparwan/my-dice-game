@@ -41,6 +41,18 @@ const Dice: React.FunctionComponent = () => {
     return (
         <div className="dice-container">
             <div className="dice-image-wrapper" aria-hidden="true">
+            <div className='players-container'>
+                {
+                    players.map((player: number, index: number) => {
+                        return (
+                            <section key={player} className={["player", currentPlayer === player ? 'active' : ''].join(' ')}>
+                                <h2>Player {player}</h2>
+                                <p aria-live='polite'>{scores[index]}</p>
+                            </section>
+                        )
+                    })
+                }
+            </div>
                 <DiceImages digit={firstDiceDigit} />
                 <DiceImages digit={secondDiceDigit} />
             </div>
