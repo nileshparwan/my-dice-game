@@ -1,12 +1,68 @@
 .dice-container {
     height: auto;
-    width: 300px;
+    width: 75vw;
+    max-width: 650px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-radius: 24px;
+    background-color: #fff;
+    padding: 50px 20px;
 }
 
-.dice-image-wrapper {
+@media (min-width: 768px) {
+    .dice-container {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
+.players-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 20px;
+    height: auto;
+    gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .players-container {
+        gap: 50px;
+    }
+}
+
+.player {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 10px;
+    flex-direction: column;
+    background-color: transparent;
+    font-weight: 200;
+    scale:0.9;
+    border: 3px solid rgb(193, 190, 190);
+    border-radius: 10px;
+}
+
+.player h2 {
+    font-weight: 200;
+}
+
+.player.active h2 {
+    font-weight: 600;
+}
+
+.player.active {
+    font-weight: 400;
+    animation: beat 2s linear infinite;
+}
+
+.player p {
+    margin: 0;
+}
+
+.image-container {
     padding:0 20px;
     display: flex;
     justify-content: space-between;
@@ -26,4 +82,11 @@ p {
     color: white;
     font-weight: 700;
     font-size: 18;
+}
+
+@keyframes beat {
+    0% { scale:0.9 }
+    100% { 
+        scale: 1; 
+    }
 }
