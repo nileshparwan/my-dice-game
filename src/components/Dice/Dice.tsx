@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler, MouseEventHandler, useState } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import './Dice.css';
 import DiceImages from '../DiceImages/DiceImages';
 
